@@ -58,10 +58,7 @@
     </div><!-- End Logo -->
 
     <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
+
     </div><!-- End Search Bar -->
 
 
@@ -147,7 +144,7 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/chart.js/chart.umd.js"></script>
@@ -156,13 +153,40 @@
   <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Add the form element -->
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/page.js"></script>
   <script src="assets/js/profile.js"></script>
+  <script>
+    function toast(msg){
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'bottom-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'success',
+        title: msg
+      })
+    }
+
+
+  </script>
+  <script>
+    $(document).ready(function() {
+
+    });
+  </script>
 </body>
 
 </html>

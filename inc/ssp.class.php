@@ -43,16 +43,16 @@ class SSP {
 
 				// Is there a formatter?
 				if ( isset( $column['formatter'] ) ) {
-                    if(empty($column['db'])){
+                    if(empty($column['model'])){
                         $row[ $column['dt'] ] = $column['formatter']( $data[$i] );
                     }
                     else{
-                        $row[ $column['dt'] ] = $column['formatter']( $data[$i][ $column['db'] ], $data[$i] );
+                        $row[ $column['dt'] ] = $column['formatter']( $data[$i][ $column['model'] ], $data[$i] );
                     }
 				}
 				else {
-                    if(!empty($column['db'])){
-                        $row[ $column['dt'] ] = $data[$i][ $columns[$j]['db'] ];
+                    if(!empty($column['model'])){
+                        $row[ $column['dt'] ] = $data[$i][ $columns[$j]['model'] ];
                     }
                     else{
                         $row[ $column['dt'] ] = "";
@@ -75,7 +75,7 @@ class SSP {
 	 *  @param  array $conn SQL connection details. The array should have
 	 *    the following properties
 	 *     * host - host name
-	 *     * db   - database name
+	 *     * model   - database name
 	 *     * user - user name
 	 *     * pass - user password
 	 *  @return resource PDO connection
@@ -141,7 +141,7 @@ class SSP {
 						'ASC' :
 						'DESC';
 
-					$orderBy[] = '`'.$column['db'].'` '.$dir;
+					$orderBy[] = '`'.$column['model'].'` '.$dir;
 				}
 			}
 
@@ -184,9 +184,9 @@ class SSP {
 				$column = $columns[ $columnIdx ];
 
 				if ( $requestColumn['searchable'] == 'true' ) {
-					if(!empty($column['db'])){
+					if(!empty($column['model'])){
 						$binding = self::bind( $bindings, '%'.$str.'%', PDO::PARAM_STR );
-						$globalSearch[] = "`".$column['db']."` LIKE ".$binding;
+						$globalSearch[] = "`".$column['model']."` LIKE ".$binding;
 					}
 				}
 			}
@@ -203,9 +203,9 @@ class SSP {
 
 				if ( $requestColumn['searchable'] == 'true' &&
 				 $str != '' ) {
-					if(!empty($column['db'])){
+					if(!empty($column['model'])){
 						$binding = self::bind( $bindings, '%'.$str.'%', PDO::PARAM_STR );
-						$columnSearch[] = "`".$column['db']."` LIKE ".$binding;
+						$columnSearch[] = "`".$column['model']."` LIKE ".$binding;
 					}
 				}
 			}
@@ -258,7 +258,7 @@ class SSP {
 
 		// Main query to actually get the data
 		$data = self::sql_exec( $db, $bindings,
-			"SELECT `".implode("`, `", self::pluck($columns, 'db'))."`
+			"SELECT `".implode("`, `", self::pluck($columns, 'model'))."`
 			 FROM `$table`
 			 $where
 			 $order
@@ -349,7 +349,7 @@ class SSP {
 
 		// Main query to actually get the data
 		$data = self::sql_exec( $db, $bindings,
-			"SELECT `".implode("`, `", self::pluck($columns, 'db'))."`
+			"SELECT `".implode("`, `", self::pluck($columns, 'model'))."`
 			 FROM `$table`
 			 $where
 			 $order
@@ -392,7 +392,7 @@ class SSP {
 	 * @param  array $sql_details SQL server connection details array, with the
 	 *   properties:
 	 *     * host - host name
-	 *     * db   - database name
+	 *     * model   - database name
 	 *     * user - user name
 	 *     * pass - user password
 	 * @return resource Database connection handle
@@ -401,7 +401,7 @@ class SSP {
 	{
 		try {
 			$db = @new PDO(
-				"mysql:host={$sql_details['host']};dbname={$sql_details['db']}",
+				"mysql:host={$sql_details['host']};dbname={$sql_details['model']}",
 				$sql_details['user'],
 				$sql_details['pass'],
 				array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION )

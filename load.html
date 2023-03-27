@@ -44,19 +44,7 @@
         $('#recordsTable').DataTable({
             "processing": true,
             "serverSide": true,
-            "ajax": "inc/profile.php",
-            "columns": [
-                {"data": "id"},
-                {"data": "firstname"},
-                {"data": "lastname"},
-                {"data": "dob"},
-                {"data": "contact"},
-                {"data": "bodyTemp"},
-                {"data": "covidDiagnosed"},
-                {"data": "covidEncounter"},
-                {"data": "vaccinated"},
-                {"data": "nationality"}
-            ]
+            "ajax": "inc/profile.php"
         });
     });
 </script>
