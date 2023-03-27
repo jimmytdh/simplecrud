@@ -46,7 +46,25 @@ $encounterQuery = "
       records WHERE covidEncounter = 'Yes'
 ";
 
-$countryQuery = "SELECT nationality, COUNT(*) AS count FROM records GROUP BY nationality";
+$genderQuery = "SELECT 
+    COUNT(CASE WHEN gender = 'Male' THEN 1 END) AS male_count,
+    COUNT(CASE WHEN gender = 'Female' THEN 1 END) AS female_count
+FROM records";
+
+$ageQuery = "
+    SELECT 
+      SUM(CASE WHEN YEAR(CURDATE()) - YEAR(dob) < 10 THEN 1 ELSE 0 END) AS below10,
+      SUM(CASE WHEN YEAR(CURDATE()) - YEAR(dob) BETWEEN 11 AND 20 THEN 1 ELSE 0 END) AS age11_20,
+      SUM(CASE WHEN YEAR(CURDATE()) - YEAR(dob) BETWEEN 21 AND 30 THEN 1 ELSE 0 END) AS age21_30,
+      SUM(CASE WHEN YEAR(CURDATE()) - YEAR(dob) BETWEEN 31 AND 40 THEN 1 ELSE 0 END) AS age31_40,
+      SUM(CASE WHEN YEAR(CURDATE()) - YEAR(dob) BETWEEN 41 AND 50 THEN 1 ELSE 0 END) AS age41_50,
+      SUM(CASE WHEN YEAR(CURDATE()) - YEAR(dob) BETWEEN 51 AND 60 THEN 1 ELSE 0 END) AS age51_60,
+      SUM(CASE WHEN YEAR(CURDATE()) - YEAR(dob) BETWEEN 61 AND 70 THEN 1 ELSE 0 END) AS age61_70,
+      SUM(CASE WHEN YEAR(CURDATE()) - YEAR(dob) BETWEEN 71 AND 80 THEN 1 ELSE 0 END) AS age71_80,
+      SUM(CASE WHEN YEAR(CURDATE()) - YEAR(dob) > 80 THEN 1 ELSE 0 END) AS above80
+    FROM 
+      records
+";
 
 $allQuery = "SELECT COUNT(*) AS record_count FROM records";
 $allVaccinatedQuery = "SELECT COUNT(*) AS vaccinated_count FROM records WHERE vaccinated='Yes'";
@@ -57,7 +75,8 @@ $allFeverQuery = "SELECT COUNT(*) AS high_temp_count FROM records WHERE bodyTemp
 $vaccinatedResult = $conn->query($vaccinatedQuery);
 $diagnosedResult = $conn->query($diagnosedQuery);
 $encounterResult = $conn->query($encounterQuery);
-//$countryResult = $conn->query($countryQuery);
+$genderResult = $conn->query($genderQuery);
+$ageResult = $conn->query($ageQuery);
 
 $allResult = $conn->query($allQuery);
 $allVaccinatedResult = $conn->query($allVaccinatedQuery);
@@ -69,7 +88,8 @@ $allFeverResult = $conn->query($allFeverQuery);
 $vaccinatedData = $vaccinatedResult->fetch_assoc();
 $diagnosedData = $diagnosedResult->fetch_assoc();
 $encounterData = $encounterResult->fetch_assoc();
-//$countryData = $countryResult->fetch_all();
+$genderData = $genderResult->fetch_assoc();
+$ageData = $ageResult->fetch_assoc();
 
 $allData = $allResult->fetch_assoc();
 $allVaccinatedData = $allVaccinatedResult->fetch_assoc();
@@ -84,7 +104,8 @@ $response = array(
     "vaccinatedData" => $vaccinatedData,
     "diagnosedData" => $diagnosedData,
     "encounterData" => $encounterData,
-//    "countryData" => $countryData,
+    "genderData" => $genderData,
+    "ageData" => $ageData,
     "allData" => $allData,
     "allVaccinatedData" => $allVaccinatedData,
     "allEncounterData" => $allEncounterData,

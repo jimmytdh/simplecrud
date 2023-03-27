@@ -70,6 +70,7 @@ function populateModal(data) {
     $('#firstname').val(data.firstname);
     $('#lastname').val(data.lastname);
     $('#dob').val(data.dob);
+    $('#gender').val(data.gender);
     $('#contact').val(data.contact);
     $('#bodyTemp').val(data.bodyTemp);
     $('input[name=covidDiagnosed][value=' + data.covidDiagnosed + ']').prop('checked', true);

@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
                 return calculateAge($d);
             }
         ),
-        array('model' => 'contact', 'dt' => 4),
+        array('model' => 'gender', 'dt' => 4),
         array('model' => 'bodyTemp', 'dt' => 5),
         array('model' => 'covidDiagnosed', 'dt' => 6),
         array('model' => 'covidEncounter', 'dt' => 7),

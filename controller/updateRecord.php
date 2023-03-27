@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
+    $gender = $_POST['gender'];
     $dob = $_POST['dob'];
     $contact = $_POST['contact'];
     $bodyTemp = $_POST['bodyTemp'];
@@ -19,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = mysqli_real_escape_string($conn, $id);
     $firstname = mysqli_real_escape_string($conn, $firstname);
     $lastname = mysqli_real_escape_string($conn, $lastname);
+    $gender = mysqli_real_escape_string($conn, $gender);
     $dob = mysqli_real_escape_string($conn, $dob);
     $contact = mysqli_real_escape_string($conn, $contact);
     $bodyTemp = mysqli_real_escape_string($conn, $bodyTemp);
@@ -31,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $query = "UPDATE records SET 
         firstname = '$firstname', 
         lastname = '$lastname', 
+        gender = '$gender', 
         dob = '$dob', 
         contact = '$contact', 
         bodyTemp = '$bodyTemp', 

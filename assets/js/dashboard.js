@@ -21,6 +21,8 @@ function loadDashboard(){
                 var vac = response.vaccinatedData;
                 var diag = response.diagnosedData;
                 var enc = response.encounterData;
+                var gender = response.genderData;
+                var age = response.ageData;
 
                 console.log(response.allData.record_count)
                 $('#allData h6').html(response.allData.record_count);
@@ -82,29 +84,32 @@ function loadDashboard(){
                 });
                 columnChart.render();
 
-                //bar chart
-                var barChart = new ApexCharts($("#barChart")[0], {
-                    series: [{
-                        data: countriesData
-                    }],
+                //piechart
+                new ApexCharts(document.querySelector("#pieChart"), {
+                    series: [parseInt(gender.male_count), parseInt(gender.female_count)],
                     chart: {
-                        type: 'bar',
-                        height: 350
-                    },
-                    plotOptions: {
-                        bar: {
-                            borderRadius: 4,
-                            horizontal: true,
+                        height: 350,
+                        type: 'pie',
+                        toolbar: {
+                            show: true
                         }
                     },
-                    dataLabels: {
-                        enabled: false
+                    labels: ['Male', 'Female']
+                }).render();
+
+                //donutchart
+                console.log('age',parseInt(age.below10))
+                new ApexCharts(document.querySelector("#donutChart"), {
+                    series: [parseInt(age.below10), parseInt(age.age11_20), parseInt(age.age21_30), parseInt(age.age31_40), parseInt(age.age41_50), parseInt(age.age51_60), parseInt(age.age61_70), parseInt(age.age71_80), parseInt(age.above80)],
+                    chart: {
+                        height: 350,
+                        type: 'donut',
+                        toolbar: {
+                            show: true
+                        }
                     },
-                    xaxis: {
-                        categories: countries,
-                    }
-                });
-                barChart.render();
+                    labels: ['Below 10', '11-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71-80', 'Above 80'],
+                }).render();
             }
         });
     });
