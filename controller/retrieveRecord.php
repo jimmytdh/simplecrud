@@ -44,7 +44,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
             'model' => 'id',
             'dt' => 10,
             'formatter' => function( $d, $row ) {
-                return '<a href="#" class="deleteRecord text-danger" data-id="'.$d.'"><i class="bi bi-trash"></i></a>';
+                return '<a href="#" class="deleteRecord btn btn-outline-danger btn-sm" data-id="'.$d.'"><i class="bi bi-x"></i> Remove</a>';
             }
         ),
         //array('model' => 'CONCAT(firstname, " ", lastname) AS full_name', 'dt' => 9)

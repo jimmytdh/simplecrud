@@ -62,24 +62,108 @@ $(document).ready(function() {
             }
         });
     });
-
-    // function to populate modal with data
-    function populateModal(data) {
-        // set values of form fields based on data
-        $('#firstname').val(data.firstname);
-        $('#lastname').val(data.lastname);
-        $('#dob').val(data.dob);
-        $('#contact').val(data.contact);
-        $('#bodyTemp').val(data.bodyTemp);
-        $('input[name=covidDiagnosed][value=' + data.covidDiagnosed + ']').prop('checked', true);
-        $('input[name=covidEncounter][value=' + data.covidEncounter + ']').prop('checked', true);
-        $('input[name=vaccinated][value=' + data.vaccinated + ']').prop('checked', true);
-        $('#nationality').val(data.nationality);
-
-        // set ID as data attribute for form submission
-        $('#id').val(data.id);
-
-        // show modal
-        $('#addProfileModal').modal('show');
-    }
 });
+
+// function to populate modal with data
+function populateModal(data) {
+    // set values of form fields based on data
+    $('#firstname').val(data.firstname);
+    $('#lastname').val(data.lastname);
+    $('#dob').val(data.dob);
+    $('#contact').val(data.contact);
+    $('#bodyTemp').val(data.bodyTemp);
+    $('input[name=covidDiagnosed][value=' + data.covidDiagnosed + ']').prop('checked', true);
+    $('input[name=covidEncounter][value=' + data.covidEncounter + ']').prop('checked', true);
+    $('input[name=vaccinated][value=' + data.vaccinated + ']').prop('checked', true);
+    $('#nationality').val(data.nationality);
+
+    // set ID as data attribute for form submission
+    $('#id').val(data.id);
+
+    // show modal
+    $('#addProfileModal').modal('show');
+}
+//generate Datatable
+function drawDatatable(){
+    $('.datatable').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": "controller/retrieveRecord.php"
+    });
+}
+
+function loadProfile(){
+    $('#main').load(`pages/profile.html`, function(){
+        drawDatatable();
+        $.getJSON("inc/all.json", function(data) {
+            data.sort(function(a, b) {
+                var labelA = a.name.common.toUpperCase();
+                var labelB = b.name.common.toUpperCase();
+                if (labelA < labelB) {
+                    return -1;
+                }
+                if (labelA > labelB) {
+                    return 1;
+                }
+                return 0;
+            });
+            $.each(data, function(index, item) {
+                var selected = item.name.common === "Philippines" ? "selected" : "";
+                $("#nationality").append("<option value='" + item.name.common + "' " + selected + ">" + item.name.common + "</option>");
+            });
+        });
+
+        $.validator.addMethod('regex', function(value, element, regexp) {
+            return this.optional(element) || regexp.test(value);
+        }, 'Please enter a valid value.');
+
+        $('#myForm').validate({
+            rules: {
+                contact: {
+                    number: true,
+                    regex: /^09\d{9}$/
+                }
+            },
+            messages: {
+                contact: {
+                    number: 'Please enter a valid mobile number',
+                    regex: 'Start with 09*********'
+                },
+                bodyTemp: {
+                    required: true,
+                    number: true,
+                    step: 0.01
+                },
+            },
+            submitHandler: function(form) {
+                var url = ($('#submitBtn').html()!=='Update') ? "controller/addRecord.php":"controller/updateRecord.php";
+                var msg = ($('#submitBtn').html()!=='Update') ? "Record added successfully":"Record updated successfully";
+                // This code is executed when the form is valid and is submitted
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: $(form).serialize(),
+                    success: function(data) {
+                        // Refresh the DataTable object
+                        $('.datatable').DataTable().ajax.reload();
+
+                        // close the modal
+                        $("#addProfileModal").modal("hide");
+
+                        // show success message
+                        toast(msg);
+
+                    }
+                });
+            }
+        });
+
+        // Check if the form is valid when the Submit button is clicked
+        $('#submitBtn').click(function() {
+            if ($('#myForm').valid()) {
+                // Submit the form if it is valid
+                $('#myForm').submit();
+            }
+        });
+    });
+}

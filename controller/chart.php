@@ -46,24 +46,35 @@ $encounterQuery = "
       records WHERE covidEncounter = 'Yes'
 ";
 
-$countryQuery = "SELECT 
-  nationality, COUNT(*) AS count
-FROM 
-  records
-GROUP BY 
-  nationality";
+$countryQuery = "SELECT nationality, COUNT(*) AS count FROM records GROUP BY nationality";
+
+$allQuery = "SELECT COUNT(*) AS record_count FROM records";
+$allVaccinatedQuery = "SELECT COUNT(*) AS vaccinated_count FROM records WHERE vaccinated='Yes'";
+$allEncounterQuery = "SELECT COUNT(*) AS covid_encounter_count FROM records WHERE covidEncounter='Yes'";
+$allFeverQuery = "SELECT COUNT(*) AS high_temp_count FROM records WHERE bodyTemp >= 38";
 
 // Execute each query and retrieve the data
 $vaccinatedResult = $conn->query($vaccinatedQuery);
 $diagnosedResult = $conn->query($diagnosedQuery);
 $encounterResult = $conn->query($encounterQuery);
-$countryResult = $conn->query($countryQuery);
+//$countryResult = $conn->query($countryQuery);
+
+$allResult = $conn->query($allQuery);
+$allVaccinatedResult = $conn->query($allVaccinatedQuery);
+$allEncounterResult = $conn->query($allEncounterQuery);
+$allFeverResult = $conn->query($allFeverQuery);
+
 
 // Extract the data from each result set
 $vaccinatedData = $vaccinatedResult->fetch_assoc();
 $diagnosedData = $diagnosedResult->fetch_assoc();
 $encounterData = $encounterResult->fetch_assoc();
-$countryData = $countryResult->fetch_all();
+//$countryData = $countryResult->fetch_all();
+
+$allData = $allResult->fetch_assoc();
+$allVaccinatedData = $allVaccinatedResult->fetch_assoc();
+$allEncounterData = $allEncounterResult->fetch_assoc();
+$allFeverData = $allFeverResult->fetch_assoc();
 
 // Close the database connection
 $conn->close();
@@ -73,7 +84,11 @@ $response = array(
     "vaccinatedData" => $vaccinatedData,
     "diagnosedData" => $diagnosedData,
     "encounterData" => $encounterData,
-    "countryData" => $countryData
+//    "countryData" => $countryData,
+    "allData" => $allData,
+    "allVaccinatedData" => $allVaccinatedData,
+    "allEncounterData" => $allEncounterData,
+    "allFeverData" => $allFeverData,
 );
 
 // Set the response header to indicate that the content type is JSON

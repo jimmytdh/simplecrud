@@ -27,12 +27,15 @@
   <link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
   <link href="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js" rel="stylesheet"/>
 
+
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
   <style>
     .modal {
       background-color: rgba(0, 0, 0, 0.5) !important; /* set a semi-transparent black overlay */
     }
+    .iframe-container {position: absolute; top: 100px; left: 0; right: 0; bottom: 0; background-color: #ddd }
+    .iframe-container iframe {display: block; width: 100%; height: 100%; border: none;}
   </style>
 
   <!-- =======================================================
@@ -83,10 +86,34 @@
           <span>Profiling</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#manual">
+          <i class="bi bi-question-circle"></i>
+          <span>About this App</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#manual">
+          <i class="bi bi-file-pdf"></i>
+          <span>Documentation</span>
+        </a>
+      </li>
 
 
-      <li class="nav-heading">Group</li>
+      <li class="nav-heading">Group M</li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#jimmy">
+          <i class="bi bi-chevron-double-right"></i>
+          <span>Jimmy Lomocso Jr.</span>
+        </a>
+      </li>
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#agnes">
+          <i class="bi bi-chevron-double-right"></i>
+          <span>Agnes May Kris Amigo</span>
+        </a>
+      </li>
 
 
     </ul>
@@ -159,6 +186,7 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/page.js"></script>
+  <script src="assets/js/dashboard.js"></script>
   <script src="assets/js/profile.js"></script>
   <script>
     function toast(msg){
@@ -179,13 +207,6 @@
         title: msg
       })
     }
-
-
-  </script>
-  <script>
-    $(document).ready(function() {
-
-    });
   </script>
 </body>
 
