@@ -1,0 +1,25 @@
+Simple PHP CRUD License Terms and Conditions
+
+1. Definitions
+"Software" refers to Simple PHP CRUD.
+"License" refers to the license granted under these terms and conditions.
+"Licensee" refers to any person or entity that uses the Software under this License.
+"Author" refers to the creator and copyright owner of the Software.
+
+2. License Grant
+The Author hereby grants the Licensee a non-exclusive, non-transferable, worldwide, royalty-free license to use, copy, modify, and distribute the Software in source or binary form for personal or commercial purposes, subject to the following conditions:
+
+	a. Attribution: The Licensee agrees to include the following notice in any copy of the Software, in whole or in part: "Simple PHP CRUD by [Author's Name] - https://github.com/[Author's Github Username]/simple-php-crud"
+
+	b. Redistribution: The Licensee may distribute the Software in source or binary form, provided that any distribution includes the License and attribution notice, and that any modifications are clearly identified as such.
+
+	c. No Warranty: The Software is provided "as is" without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the Author be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the Software or the use or other dealings in the Software.
+
+
+3. Termination
+This License will terminate automatically if the Licensee fails to comply with any term or condition of this License. Upon termination, the Licensee must immediately cease all use of the Software and destroy all copies of the Software in their possession.
+
+4. Entire Agreement
+This License constitutes the entire agreement between the parties with respect to the use of the Software and supersedes all prior or contemporaneous agreements, understandings, or communications between the parties regarding the Software.
+
+By using the Software, the Licensee acknowledges that they have read this License, understand it, and agree to be bound by its terms and conditions.
