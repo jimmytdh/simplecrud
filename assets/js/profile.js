@@ -13,10 +13,11 @@ $(document).ready(function() {
             if (result.isConfirmed) {
                 // show success message
                 $.ajax({
-                    url: 'controller/deleteRecord.php?id=' + id,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function() {
+                    url: window.location.pathname + "api/delete.php",
+                    type: 'POST',
+                    data: { id:id},
+                    success: function(data) {
+                        console.log(data)
                         //show msg alert
                         var msg = 'Record successfully deleted!'
                         toast(msg);
@@ -53,7 +54,7 @@ $(document).ready(function() {
         var id = $(this).data('id');
         // send AJAX request to get data for the selected row
         $.ajax({
-            url: 'controller/getRecord.php?id=' + id,
+            url: window.location.pathname + "api/read.php?id=" + id,
             type: 'GET',
             dataType: 'json',
             success: function(response) {
@@ -89,7 +90,7 @@ function drawDatatable(){
     $('.datatable').DataTable({
         "processing": true,
         "serverSide": true,
-        "ajax": "controller/retrieveRecord.php"
+        "ajax": window.location.pathname + "api/read.php"
     });
 }
 
@@ -137,7 +138,7 @@ function loadProfile(){
                 },
             },
             submitHandler: function(form) {
-                var url = ($('#submitBtn').html()!=='Update') ? "controller/addRecord.php":"controller/updateRecord.php";
+                var url = ($('#submitBtn').html()!=='Update') ? window.location.pathname + "api/store.php" : window.location.pathname + "api/update.php";
                 var msg = ($('#submitBtn').html()!=='Update') ? "Record added successfully":"Record updated successfully";
                 // This code is executed when the form is valid and is submitted
                 $.ajax({

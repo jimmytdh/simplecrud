@@ -5,8 +5,7 @@ $(function(){
 function loadDashboard(){
     $('#main').load(`pages/dashboard.html`, function(){
         // Define the URL of the server-side script that will retrieve the data
-        var url = "controller/chart.php";
-
+        var url = window.location.pathname + "api/chart.php"
         // Define the parameters to pass to the server-side script (if any)
         var params = {
             // Insert any parameters to pass here
@@ -19,24 +18,16 @@ function loadDashboard(){
             success: function(response) {
                 // Once the response is received, extract the data for each series
                 var vac = response.vaccinatedData;
-                var diag = response.diagnosedData;
+                var diag = response.diagnoseData;
                 var enc = response.encounterData;
                 var gender = response.genderData;
                 var age = response.ageData;
 
-                console.log(response.allData.record_count)
-                $('#allData h6').html(response.allData.record_count);
-                $('#allVaccinated h6').html(response.allVaccinatedData.vaccinated_count);
-                $('#allEncounter h6').html(response.allEncounterData.covid_encounter_count);
-                $('#allFever h6').html(response.allFeverData.high_temp_count);
+                $('#allData h6').html(response.cardData.record_count);
+                $('#allVaccinated h6').html(response.cardData.vaccinated_count);
+                $('#allEncounter h6').html(response.cardData.covid_encounter_count);
+                $('#allFever h6').html(response.cardData.high_temp_count);
 
-                var countries = $.map(response.countryData, function(arr) {
-                    return arr[0];
-                });
-
-                var countriesData = $.map(response.countryData, function(arr) {
-                    return arr[1];
-                });
                 // Pass the data to the chart and render it
                 var columnChart = new ApexCharts($("#columnChart")[0], {
                     series: [{
@@ -86,7 +77,7 @@ function loadDashboard(){
 
                 //piechart
                 new ApexCharts(document.querySelector("#pieChart"), {
-                    series: [parseInt(gender.male_count), parseInt(gender.female_count)],
+                    series: [parseInt(response.cardData.male_count), parseInt(response.cardData.female_count)],
                     chart: {
                         height: 350,
                         type: 'pie',
@@ -98,7 +89,6 @@ function loadDashboard(){
                 }).render();
 
                 //donutchart
-                console.log('age',parseInt(age.below10))
                 new ApexCharts(document.querySelector("#donutChart"), {
                     series: [parseInt(age.below10), parseInt(age.age11_20), parseInt(age.age21_30), parseInt(age.age31_40), parseInt(age.age41_50), parseInt(age.age51_60), parseInt(age.age61_70), parseInt(age.age71_80), parseInt(age.above80)],
                     chart: {

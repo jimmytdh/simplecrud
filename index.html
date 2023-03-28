@@ -121,33 +121,114 @@
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
-
     <div class="pagetitle">
-      <h1>Blank Page</h1>
-    </div><!-- End Page Title -->
+      <h1>Dashboard</h1>
+    </div>
+    <section class="section dashboard">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="card info-card sales-card">
+            <div class="card-body">
+              <h5 class="card-title">Profile</h5>
 
-    <section class="section">
+              <div class="d-flex align-items-center">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-person"></i>
+                </div>
+                <div class="ps-3" id="allData">
+                  <h6>0</h6>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card info-card revenue-card">
+            <div class="card-body">
+              <h5 class="card-title">Vaccinated</h5>
+
+              <div class="d-flex align-items-center">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-check"></i>
+                </div>
+                <div class="ps-3" id="allVaccinated">
+                  <h6>0</h6>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card info-card customers-card">
+            <div class="card-body">
+              <h5 class="card-title">COVID19 Encounter</h5>
+
+              <div class="d-flex align-items-center">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-virus"></i>
+                </div>
+                <div class="ps-3" id="allEncounter">
+                  <h6>0</h6>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card info-card customers-card">
+            <div class="card-body">
+              <h5 class="card-title">Fever</h5>
+
+              <div class="d-flex align-items-center">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-bandaid"></i>
+                </div>
+                <div class="ps-3" id="allFever">
+                  <h6>0</h6>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-lg-6">
-
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Example Card</h5>
-              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+              <h5 class="card-title">Gender Comparison Chart</h5>
+              <!-- Pie Chart -->
+              <div id="pieChart"></div>
             </div>
           </div>
-
         </div>
-
         <div class="col-lg-6">
-
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Example Card</h5>
-              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+              <h5 class="card-title">Age Bracket</h5>
+
+              <!-- Donut Chart -->
+              <div id="donutChart"></div>
+              <!-- End Donut Chart -->
+
             </div>
           </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Case by Age Group</h5>
 
+              <!-- Column Chart -->
+              <div id="columnChart"></div>
+              <!-- End Column Chart -->
+            </div>
+          </div>
         </div>
       </div>
     </section>
