@@ -7,6 +7,8 @@ $(function(){
             loadDashboard();
         else if(page ==='profile')
             loadProfile();
+        else if(page ==='about')
+            $('#main').load('pages/about.html');
         else if(page ==='jimmy'){
             $('#main').load('members/jimmytdh.html',function(){
 
