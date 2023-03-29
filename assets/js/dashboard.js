@@ -1,5 +1,7 @@
 $(function(){
-    loadDashboard();
+    setTimeout(function(){
+        loadDashboard();
+    },1500);
 });
 
 function loadDashboard(){
